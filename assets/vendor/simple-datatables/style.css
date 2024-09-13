@@ -90,6 +90,11 @@
 	cursor: default;
 }
 
+.hidden {
+	display: none;
+}
+
+
 .datatable-pagination .datatable-ellipsis a,
 .datatable-pagination .datatable-disabled a,
 .datatable-pagination .datatable-disabled a:focus,

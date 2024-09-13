@@ -56,7 +56,6 @@
       select('.search-bar').classList.toggle('search-bar-show')
     })
   }
-
   /**
    * Navbar links active state on scroll
    */
@@ -281,26 +280,55 @@
   /**
    * Initiate Datatables
    */
-  const datatables = select('.datatable', true)
-  datatables.forEach(datatable => {
-    new simpleDatatables.DataTable(datatable, {
-      perPageSelect: [5, 10, 15, ["All", -1]],
-      columns: [{
-          select: 2,
-          sortSequence: ["desc", "asc"]
-        },
-        {
-          select: 3,
-          sortSequence: ["desc"]
-        },
-        {
-          select: 4,
-          cellClass: "green",
-          headerClass: "red"
-        }
-      ]
+  // const datatables = select('.datatable', true)
+  // datatables.forEach(datatable => {
+  //   new simpleDatatables.DataTable(datatable, {
+  //     perPageSelect: [5, 10, 15, ["All", -1]],
+  //     columns: [{
+  //         select: 2,
+  //         sortSequence: ["desc", "asc"]
+  //       },
+  //       {
+  //         select: 3,
+  //         sortSequence: ["desc"]
+  //       },
+  //       {
+  //         select: 4,
+  //         cellClass: "green",
+  //         headerClass: "red"
+  //       }
+  //     ]
+  //   });
+  // })
+  const datatables = select('.datatable', true);
+  datatables.forEach(datatable=>{
+    new simpleDatatables.DataTable(datatable,{
+      responsive:true,
+      paging:true,
+      searching:false,
+      infor:false,
     });
-  })
+  });
+
+
+// Bắt sự kiện khi người dùng chọn option trong select menu
+document.getElementById('search-options').addEventListener('change', function () {
+  // Ẩn tất cả các text input khi giá trị select thay đổi
+  document.querySelectorAll('#text-inputs > div').forEach(function (div) {
+    div.classList.add('hidden');
+  });
+
+  // Lấy giá trị của option được chọn
+  const selectedOption = this.value;
+
+  // Hiển thị text input tương ứng với option được chọn
+  if (selectedOption === 'SEARCH_S/N') {
+    document.getElementById('input-sn').classList.remove('hidden');
+  } else if (selectedOption === 'SEARCH_RP') {
+    // Hiển thị nhóm tìm kiếm theo kho cùng các trường khác
+    document.getElementById('rp-row').classList.remove('hidden');
+  }
+});
 
   /**
    * Autoresize echart charts

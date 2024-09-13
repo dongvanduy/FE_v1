@@ -4,152 +4,82 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Dashboard - Advanced Search</title>
-
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
-  <link href="assets/css/style.css" rel="stylesheet">
-
-  <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-
+  <title>Select with Text Inputs</title>
   <style>
-    .search-section {
-      margin-bottom: 20px;
-    }
-
-    .search-section input {
-      width: auto;
-    }
-
-    #search-btn {
-      margin-top: 10px;
+    /* CSS để ẩn text input mặc định */
+    .hidden {
+      display: none;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="col-12">
-    <div class="card recent-sales overflow-auto">
-      <div class="card-body">
-        <h5 class="card-title">Recent Sales <span>| Today</span></h5>
-        
-        <h1>Tìm kiếm nâng cao</h1>
-        
-        <!-- Search Section -->
-        <div class="search-section">
-          <form id="search-form" class="form-inline">
-            <!-- Row 1 -->
-            <div class="row">
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label for="search-sn">Tìm theo SN:</label>
-                  <input type="text" id="search-sn" class="form-control" placeholder="Nhập SN">
-                </div>
-              </div>
+  <!-- Dropdown Menu -->
+  <label for="search-options">Tìm kiếm theo:</label>
+  <select id="search-options" class="form-select">
+    <option value="none">Open this select menu</option>
+    <option value="sn">Tìm theo SN</option>
+    <option value="kho">Tìm theo Kho</option>
+    <option value="ma-loi">Tìm theo Mã lỗi</option>
+    <option value="mo-ta-loi">Tìm theo Mô tả lỗi</option>
+    <option value="cho-muon">Tìm theo Bản đang cho mượn</option>
+  </select>
 
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label for="search-kho">Tìm theo Kho:</label>
-                  <input type="text" id="search-kho" class="form-control" placeholder="Nhập Kho">
-                </div>
-              </div>
+  <!-- Các Text Inputs ẩn -->
+  <div id="text-inputs">
+    <div id="input-sn" class="hidden">
+      <label for="sn-input">Nhập SN:</label>
+      <input type="text" id="sn-input" class="form-control" placeholder="Nhập SN">
+    </div>
 
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label for="search-ma-loi">Tìm theo Mã lỗi:</label>
-                  <input type="text" id="search-ma-loi" class="form-control" placeholder="Nhập Mã lỗi">
-                </div>
-              </div>
-            </div>
+    <div id="input-kho" class="hidden">
+      <label for="kho-input">Nhập Kho:</label>
+      <input type="text" id="kho-input" class="form-control" placeholder="Nhập Kho">
+    </div>
 
-            <!-- Row 2 -->
-            <div class="row mt-3">
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label for="search-mo-ta-loi">Tìm theo Mô tả lỗi:</label>
-                  <input type="text" id="search-mo-ta-loi" class="form-control" placeholder="Nhập Mô tả lỗi">
-                </div>
-              </div>
+    <div id="input-ma-loi" class="hidden">
+      <label for="ma-loi-input">Nhập Mã lỗi:</label>
+      <input type="text" id="ma-loi-input" class="form-control" placeholder="Nhập Mã lỗi">
+    </div>
 
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label for="search-cho-muon">Tìm theo Bản đang cho mượn:</label>
-                  <input type="text" id="search-cho-muon" class="form-control" placeholder="Nhập trạng thái cho mượn">
-                </div>
-              </div>
+    <div id="input-mo-ta-loi" class="hidden">
+      <label for="mo-ta-loi-input">Nhập Mô tả lỗi:</label>
+      <input type="text" id="mo-ta-loi-input" class="form-control" placeholder="Nhập Mô tả lỗi">
+    </div>
 
-              <div class="col-md-4">
-                <button id="search-btn" class="btn btn-primary mt-4">Tìm kiếm</button>
-              </div>
-            </div>
-          </form>
-        </div>
-        
-        <!-- Table with Search and Scrollable Columns -->
-        <table class="table table-borderless table-hover datatable" style="width:100%">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>SERIAL_NUMBER</th>
-              <th>MODEL_NAME</th>
-              <th>TEST_TIME</th>
-              <th>WIP_GP</th>
-              <th>TEST_CODE</th>
-              <th>ERROR_DESC</th>
-              <th>ERROR_DESC2</th>
-              <th>REPOSITORY</th>
-              <th>TIME_IN</th>
-              <th>Salesperson</th>
-              <th>Email</th>
-              <th>Phone</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>#2457</th>
-              <td>Brandon Jacob</td>
-              <td>At praesentium minu</td>
-              <td>$64</td>
-              <td><span class="badge bg-success">Approved</span></td>
-              <td>5</td>
-              <td>2023-09-15</td>
-              <td>Credit Card</td>
-              <td>USA</td>
-              <td>New York</td>
-              <td>John Doe</td>
-              <td>brandon@example.com</td>
-              <td>+1 555 1234</td>
-            </tr>
-            <tr>
-              <th>#2147</th>
-              <td>Bridie Kessler</td>
-              <td>Blanditiis dolor omnis similique</td>
-              <td>$47</td>
-              <td><span class="badge bg-warning">Pending</span></td>
-              <td>2</td>
-              <td>2023-09-14</td>
-              <td>PayPal</td>
-              <td>UK</td>
-              <td>London</td>
-              <td>Jane Smith</td>
-              <td>bridie@example.com</td>
-              <td>+44 555 5678</td>
-            </tr>
-            <!-- Add more rows as needed -->
-          </tbody>
-        </table>
-
-      </div>
+    <div id="input-cho-muon" class="hidden">
+      <label for="cho-muon-input">Nhập trạng thái cho mượn:</label>
+      <input type="text" id="cho-muon-input" class="form-control" placeholder="Nhập trạng thái cho mượn">
     </div>
   </div>
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="assets/js/main.js"></script>
+  <!-- JavaScript -->
+  <script>
+    // Bắt sự kiện khi người dùng chọn option trong select menu
+    document.getElementById('search-options').addEventListener('change', function() {
+      // Ẩn tất cả các text input khi giá trị select thay đổi
+      document.querySelectorAll('#text-inputs > div').forEach(function(div) {
+        div.classList.add('hidden');
+      });
+
+      // Lấy giá trị của option được chọn
+      const selectedOption = this.value;
+
+      // Hiển thị text input tương ứng với option được chọn
+      if (selectedOption === 'sn') {
+        document.getElementById('input-sn').classList.remove('hidden');
+      } else if (selectedOption === 'kho') {
+        document.getElementById('input-kho').classList.remove('hidden');
+      } else if (selectedOption === 'ma-loi') {
+        document.getElementById('input-ma-loi').classList.remove('hidden');
+      } else if (selectedOption === 'mo-ta-loi') {
+        document.getElementById('input-mo-ta-loi').classList.remove('hidden');
+      } else if (selectedOption === 'cho-muon') {
+        document.getElementById('input-cho-muon').classList.remove('hidden');
+      }
+    });
+  </script>
 
 </body>
 
